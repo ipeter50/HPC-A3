@@ -1,0 +1,159 @@
+Loaded module: cuda/10.0
+usage: numactl [--all | -a] [--interleave= | -i <nodes>] [--preferred= | -p <node>]
+               [--physcpubind= | -C <cpus>] [--cpunodebind= | -N <nodes>]
+               [--membind= | -m <nodes>] [--localalloc | -l] command args ...
+       numactl [--show | -s]
+       numactl [--hardware | -H]
+       numactl [--length | -l <length>] [--offset | -o <offset>] [--shmmode | -M <shmmode>]
+               [--strict | -t]
+               [--shmid | -I <id>] --shm | -S <shmkeyfile>
+               [--shmid | -I <id>] --file | -f <tmpfsfile>
+               [--huge | -u] [--touch | -T] 
+               memory policy | --dump | -d | --dump-nodes | -D
+
+memory policy is --interleave | -i, --preferred | -p, --membind | -m, --localalloc | -l
+<nodes> is a comma delimited list of node numbers or A-B ranges or all.
+Instead of a number a node can also be:
+  netdev:DEV the node connected to network device DEV
+  file:PATH  the node the block device of path is connected to
+  ip:HOST    the node of the network device host routes through
+  block:PATH the node of block device path
+  pci:[seg:]bus:dev[:func] The node of a PCI device
+<cpus> is a comma delimited list of cpu numbers or A-B ranges or all
+all ranges can be inverted with !
+all numbers and ranges can be made cpuset-relative with +
+the old --cpubind argument is deprecated.
+use --cpunodebind or --physcpubind instead
+<length> can have g (GB), m (MB) or k (KB) suffixes
+  5859.375  95159.088 0 # matmult_lib
+  5859.375 170773.997 0 # matmult_lib
+  5859.375 307281.506 0 # matmult_lib
+  5859.375 450940.911 0 # matmult_lib
+  5859.375 526114.910 0 # matmult_lib
+  5859.375 607038.926 0 # matmult_lib
+  5859.375 337712.834 0 # matmult_lib
+  5859.375 369495.870 0 # matmult_lib
+ 23437.500  99067.207 0 # matmult_lib
+ 23437.500 192197.749 0 # matmult_lib
+ 23437.500 334003.474 0 # matmult_lib
+ 23437.500 537249.099 0 # matmult_lib
+ 23437.500 633007.432 0 # matmult_lib
+ 23437.500 734216.992 0 # matmult_lib
+ 23437.500 440746.497 0 # matmult_lib
+ 23437.500 406881.887 0 # matmult_lib
+ 52734.375  97733.881 0 # matmult_lib
+ 52734.375 187701.022 0 # matmult_lib
+ 52734.375 326944.328 0 # matmult_lib
+ 52734.375 552210.691 0 # matmult_lib
+ 52734.375 629388.950 0 # matmult_lib
+ 52734.375 735265.369 0 # matmult_lib
+ 52734.375 487594.693 0 # matmult_lib
+ 52734.375 439545.451 0 # matmult_lib
+ 93750.000  96830.451 0 # matmult_lib
+ 93750.000 189295.517 0 # matmult_lib
+ 93750.000 315151.962 0 # matmult_lib
+ 93750.000 555986.650 0 # matmult_lib
+ 93750.000 600134.228 0 # matmult_lib
+ 93750.000 748863.951 0 # matmult_lib
+ 93750.000  55621.555 0 # matmult_lib
+ 93750.000  22761.709 0 # matmult_lib
+146484.375 100029.439 0 # matmult_lib
+146484.375 195705.510 0 # matmult_lib
+146484.375 338991.412 0 # matmult_lib
+146484.375 548675.447 0 # matmult_lib
+146484.375 645035.107 0 # matmult_lib
+146484.375 761611.205 0 # matmult_lib
+146484.375  51546.598 0 # matmult_lib
+146484.375  34364.302 0 # matmult_lib
+210937.500 102483.216 0 # matmult_lib
+210937.500 198149.844 0 # matmult_lib
+210937.500 336827.594 0 # matmult_lib
+210937.500 570457.941 0 # matmult_lib
+210937.500 671240.432 0 # matmult_lib
+210937.500 786192.514 0 # matmult_lib
+210937.500 116838.719 0 # matmult_lib
+210937.500  41947.681 0 # matmult_lib
+287109.375  99818.660 0 # matmult_lib
+287109.375 195058.662 0 # matmult_lib
+287109.375 338265.467 0 # matmult_lib
+287109.375 574561.327 0 # matmult_lib
+287109.375 669558.665 0 # matmult_lib
+287109.375 794765.915 0 # matmult_lib
+287109.375 484498.422 0 # matmult_lib
+287109.375 372092.804 0 # matmult_lib
+375000.000 102114.725 0 # matmult_lib
+375000.000 200496.774 0 # matmult_lib
+375000.000 356642.603 0 # matmult_lib
+375000.000 590277.229 0 # matmult_lib
+375000.000 686300.919 0 # matmult_lib
+375000.000 815466.097 0 # matmult_lib
+375000.000 503728.625 0 # matmult_lib
+375000.000 424656.105 0 # matmult_lib
+474609.375 101265.744 0 # matmult_lib
+474609.375 199148.640 0 # matmult_lib
+474609.375 357813.101 0 # matmult_lib
+474609.375 591441.926 0 # matmult_lib
+474609.375 687116.605 0 # matmult_lib
+474609.375 825246.631 0 # matmult_lib
+474609.375 545986.185 0 # matmult_lib
+474609.375 448762.068 0 # matmult_lib
+585937.500 100670.237 0 # matmult_lib
+585937.500 198635.644 0 # matmult_lib
+585937.500 347124.475 0 # matmult_lib
+585937.500 591554.551 0 # matmult_lib
+585937.500 685106.768 0 # matmult_lib
+585937.500 819173.525 0 # matmult_lib
+585937.500 603012.216 0 # matmult_lib
+585937.500 492718.489 0 # matmult_lib
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@n-62-20-16>
+Subject: Job 1858939: <NONAME> in cluster <dcc> Done
+
+Job <NONAME> was submitted from host <n-62-20-6> by user <s182169> in cluster <dcc> at Wed Jan 23 14:03:30 2019
+Job was executed on host(s) <12*n-62-20-16>, in queue <hpcintrogpu>, as user <s182169> in cluster <dcc> at Wed Jan 23 14:03:32 2019
+</zhome/80/a/134683> was used as the home directory.
+</zhome/80/a/134683/Documents/HPC/Week_3/Assignment_3/Matmult> was used as the working directory.
+Started at Wed Jan 23 14:03:32 2019
+Terminated at Wed Jan 23 14:09:20 2019
+Results reported at Wed Jan 23 14:09:20 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -q hpcintrogpu
+#BSUB -o lib_output.dat
+#BSUB -n 12
+#BSUB -gpu "num=1:mode=exclusive_process:mps=yes" 
+module load cuda/10.0
+numactl --cpunodebind=0
+
+for mat_size in 500 1000 1500 2000 2500 3000 3500 4000 4500 5000
+do
+	for num_threads in 1 2 4 8 10 12 16 24
+	do
+		MKL_NUM_THREADS=$num_threads ./matmult_f.nvcc lib $mat_size $mat_size $mat_size
+	done
+done
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   2085.00 sec.
+    Max Memory :                                 249 MB
+    Average Memory :                             221.79 MB
+    Total Requested Memory :                     12288.00 MB
+    Delta Memory :                               12039.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                30
+    Run time :                                   358 sec.
+    Turnaround time :                            350 sec.
+
+The output (if any) is above this job summary.
+

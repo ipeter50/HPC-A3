@@ -1,12 +1,12 @@
 TARGET	= libmatmult.so
-LIBSRCS	= 
-LIBOBJS	= 
+LIBSRCS	= libmatmult.cu lib_kernels.cu
+LIBOBJS	= libmatmult.o lib_kernels.o
 
 OPT	= -g -O3
 PIC = -fpic
 OMP   = -fopenmp
 XPIC  = -Xcompiler -fpic
-XOPT  = -Xptxas=-v # use -lineinfo for profiler, use -G for debugging
+XOPT  = -Xptxas=-v -lineinfo -G# use -lineinfo for profiler, use -G for debugging
 XARCH = -arch=sm_70
 
 CXX	= nvcc
@@ -16,7 +16,7 @@ CUDA_PATH ?= /appl/cuda/10.0
 INCLUDES = -I$(CUDA_PATH)/include -I$(CUDA_PATH)/samples/common/inc
 
 SOFLAGS = -shared
-XLIBS	= -lcublas
+XLIBS	= -lcublas -L -lmkl_core
 
 $(TARGET): $(LIBOBJS)
 	$(CXX) -o $@ $(CXXFLAGS) $(SOFLAGS) $(INCLUDES) $^ $(XLIBS)
