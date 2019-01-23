@@ -25,26 +25,26 @@ all numbers and ranges can be made cpuset-relative with +
 the old --cpubind argument is deprecated.
 use --cpunodebind or --physcpubind instead
 <length> can have g (GB), m (MB) or k (KB) suffixes
-   234.375     99.156 0 # matmult_gpu1
-   937.500     41.731 0 # matmult_gpu1
-  2109.375     40.648 0 # matmult_gpu1
-  5859.375     36.411 0 # matmult_gpu1
- 11484.375     31.815 0 # matmult_gpu1
- 15000.000     29.814 0 # matmult_gpu1
- 23437.500     24.615 0 # matmult_gpu1
- 52734.375     22.998 0 # matmult_gpu1
+  5859.375 136288.748 0 # matmult_gpu3
+ 23437.500 365890.320 0 # matmult_gpu3
+ 52734.375 554367.722 0 # matmult_gpu3
+ 93750.000 700764.271 248 # matmult_gpu3
+146484.375 765701.780 976 # matmult_gpu3
+210937.500 842180.910 2752 # matmult_gpu3
+375000.000 951547.891 16000 # matmult_gpu3
+585937.500 997363.213 33280 # matmult_gpu3
 
 ------------------------------------------------------------
-Sender: LSF System <lsfadmin@n-62-20-16>
-Subject: Job 1861089: <gpu1> in cluster <dcc> Done
+Sender: LSF System <lsfadmin@n-62-20-14>
+Subject: Job 1861091: <gpu3_right> in cluster <dcc> Done
 
-Job <gpu1> was submitted from host <n-62-20-6> by user <s182169> in cluster <dcc> at Wed Jan 23 21:32:51 2019
-Job was executed on host(s) <12*n-62-20-16>, in queue <hpcintrogpu>, as user <s182169> in cluster <dcc> at Wed Jan 23 21:32:51 2019
+Job <gpu3_right> was submitted from host <n-62-20-6> by user <s182169> in cluster <dcc> at Wed Jan 23 21:32:59 2019
+Job was executed on host(s) <12*n-62-20-14>, in queue <hpcintrogpu>, as user <s182169> in cluster <dcc> at Wed Jan 23 21:33:01 2019
 </zhome/80/a/134683> was used as the home directory.
 </zhome/80/a/134683/Documents/HPC/Week_3/Assignment_3/Matmult> was used as the working directory.
-Started at Wed Jan 23 21:32:51 2019
-Terminated at Wed Jan 23 21:40:28 2019
-Results reported at Wed Jan 23 21:40:28 2019
+Started at Wed Jan 23 21:33:01 2019
+Terminated at Wed Jan 23 21:33:41 2019
+Results reported at Wed Jan 23 21:33:41 2019
 
 Your job looked like:
 
@@ -52,18 +52,16 @@ Your job looked like:
 # LSBATCH: User input
 #!/bin/bash
 #BSUB -q hpcintrogpu
-#BSUB -o gpu1_output.dat
-#BSUB -J gpu1
+#BSUB -o gpu3_right_output.dat
+#BSUB -J gpu3_right
 #BSUB -n 12
 #BSUB -gpu "num=1:mode=exclusive_process:mps=yes" 
 module load cuda/10.0
 numactl --cpunodebind=0
 
-for mat_size in 100 200 300 500 700 800 1000 1500
+for mat_size in 500 1000 1500 2000 2500 3000 4000 5000
 do
-	
-	./matmult_f.nvcc gpu1 $mat_size $mat_size $mat_size
-	
+	./matmult_f.nvcc gpu3 $mat_size $mat_size $mat_size	
 done
 
 ------------------------------------------------------------
@@ -72,16 +70,16 @@ Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   454.00 sec.
-    Max Memory :                                 227 MB
-    Average Memory :                             225.19 MB
+    CPU time :                                   35.37 sec.
+    Max Memory :                                 238 MB
+    Average Memory :                             234.00 MB
     Total Requested Memory :                     12288.00 MB
-    Delta Memory :                               12061.00 MB
+    Delta Memory :                               12050.00 MB
     Max Swap :                                   -
     Max Processes :                              4
     Max Threads :                                7
-    Run time :                                   477 sec.
-    Turnaround time :                            457 sec.
+    Run time :                                   43 sec.
+    Turnaround time :                            42 sec.
 
 The output (if any) is above this job summary.
 
