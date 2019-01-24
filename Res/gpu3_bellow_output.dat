@@ -25,26 +25,29 @@ all numbers and ranges can be made cpuset-relative with +
 the old --cpubind argument is deprecated.
 use --cpunodebind or --physcpubind instead
 <length> can have g (GB), m (MB) or k (KB) suffixes
-  5859.375 139404.450 0 # matmult_gpu3
- 23437.500 412423.710 0 # matmult_gpu3
- 52734.375 672614.295 0 # matmult_gpu3
- 93750.000 801812.501 248 # matmult_gpu3
-146484.375 936853.485 976 # matmult_gpu3
-210937.500 1001663.383 2752 # matmult_gpu3
-375000.000 1138947.932 16000 # matmult_gpu3
-585937.500 1213054.295 33280 # matmult_gpu3
+  5859.375 139527.219 0 # matmult_gpu3
+ 23437.500 404433.277 0 # matmult_gpu3
+ 52734.375 584822.737 0 # matmult_gpu3
+ 93750.000 728502.460 248 # matmult_gpu3
+146484.375 804672.071 976 # matmult_gpu3
+210937.500 902301.670 2752 # matmult_gpu3
+375000.000 1016362.616 16000 # matmult_gpu3
+585937.500 1079922.138 33280 # matmult_gpu3
+843750.000 1159061.074 81408 # matmult_gpu3
+1500000.000 1253312.943 561152 # matmult_gpu3
+2343750.000 1300131.327 1.04858e+06 # matmult_gpu3
 
 ------------------------------------------------------------
-Sender: LSF System <lsfadmin@n-62-20-15>
-Subject: Job 1861092: <gpu3_bellow> in cluster <dcc> Done
+Sender: LSF System <lsfadmin@n-62-20-16>
+Subject: Job 1864200: <gpu3_bellow> in cluster <dcc> Done
 
-Job <gpu3_bellow> was submitted from host <n-62-20-6> by user <s182169> in cluster <dcc> at Wed Jan 23 21:34:43 2019
-Job was executed on host(s) <12*n-62-20-15>, in queue <hpcintrogpu>, as user <s182169> in cluster <dcc> at Wed Jan 23 21:34:43 2019
+Job <gpu3_bellow> was submitted from host <n-62-20-6> by user <s182169> in cluster <dcc> at Thu Jan 24 10:06:35 2019
+Job was executed on host(s) <12*n-62-20-16>, in queue <hpcintrogpu>, as user <s182169> in cluster <dcc> at Thu Jan 24 10:06:36 2019
 </zhome/80/a/134683> was used as the home directory.
 </zhome/80/a/134683/Documents/HPC/Week_3/Assignment_3/Matmult> was used as the working directory.
-Started at Wed Jan 23 21:34:43 2019
-Terminated at Wed Jan 23 21:35:21 2019
-Results reported at Wed Jan 23 21:35:21 2019
+Started at Thu Jan 24 10:06:36 2019
+Terminated at Thu Jan 24 10:08:06 2019
+Results reported at Thu Jan 24 10:08:06 2019
 
 Your job looked like:
 
@@ -59,7 +62,7 @@ Your job looked like:
 module load cuda/10.0
 numactl --cpunodebind=0
 
-for mat_size in 500 1000 1500 2000 2500 3000 4000 5000
+for mat_size in 500 1000 1500 2000 2500 3000 4000 5000 6000 8000 10000
 do
 	./matmult_f.nvcc gpu3 $mat_size $mat_size $mat_size	
 done
@@ -70,16 +73,16 @@ Successfully completed.
 
 Resource usage summary:
 
-    CPU time :                                   35.01 sec.
-    Max Memory :                                 235 MB
-    Average Memory :                             232.50 MB
+    CPU time :                                   86.00 sec.
+    Max Memory :                                 238 MB
+    Average Memory :                             120.25 MB
     Total Requested Memory :                     12288.00 MB
-    Delta Memory :                               12053.00 MB
+    Delta Memory :                               12050.00 MB
     Max Swap :                                   -
     Max Processes :                              4
     Max Threads :                                7
-    Run time :                                   41 sec.
-    Turnaround time :                            38 sec.
+    Run time :                                   93 sec.
+    Turnaround time :                            91 sec.
 
 The output (if any) is above this job summary.
 
