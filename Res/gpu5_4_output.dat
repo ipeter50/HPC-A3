@@ -1,0 +1,88 @@
+Loaded module: cuda/10.0
+usage: numactl [--all | -a] [--interleave= | -i <nodes>] [--preferred= | -p <node>]
+               [--physcpubind= | -C <cpus>] [--cpunodebind= | -N <nodes>]
+               [--membind= | -m <nodes>] [--localalloc | -l] command args ...
+       numactl [--show | -s]
+       numactl [--hardware | -H]
+       numactl [--length | -l <length>] [--offset | -o <offset>] [--shmmode | -M <shmmode>]
+               [--strict | -t]
+               [--shmid | -I <id>] --shm | -S <shmkeyfile>
+               [--shmid | -I <id>] --file | -f <tmpfsfile>
+               [--huge | -u] [--touch | -T] 
+               memory policy | --dump | -d | --dump-nodes | -D
+
+memory policy is --interleave | -i, --preferred | -p, --membind | -m, --localalloc | -l
+<nodes> is a comma delimited list of node numbers or A-B ranges or all.
+Instead of a number a node can also be:
+  netdev:DEV the node connected to network device DEV
+  file:PATH  the node the block device of path is connected to
+  ip:HOST    the node of the network device host routes through
+  block:PATH the node of block device path
+  pci:[seg:]bus:dev[:func] The node of a PCI device
+<cpus> is a comma delimited list of cpu numbers or A-B ranges or all
+all ranges can be inverted with !
+all numbers and ranges can be made cpuset-relative with +
+the old --cpubind argument is deprecated.
+use --cpunodebind or --physcpubind instead
+<length> can have g (GB), m (MB) or k (KB) suffixes
+  6144.000 117196.478 0 # matmult_gpu5
+ 24576.000 260985.283 0 # matmult_gpu5
+ 53016.000 292032.943 0 # matmult_gpu5
+ 98304.000 341111.219 300 # matmult_gpu5
+146016.000 391467.869 968 # matmult_gpu5
+212064.000 305232.573 2816 # matmult_gpu5
+375000.000 314183.744 16000 # matmult_gpu5
+591576.000 293368.498 70656 # matmult_gpu5
+848256.000 286312.343 176640 # matmult_gpu5
+1500000.000 277669.067 561152 # matmult_gpu5
+2351256.000 265084.066 1.24518e+06 # matmult_gpu5
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@n-62-20-15>
+Subject: Job 1867715: <gpu5_4> in cluster <dcc> Done
+
+Job <gpu5_4> was submitted from host <n-62-20-10> by user <s182169> in cluster <dcc> at Thu Jan 24 21:43:35 2019
+Job was executed on host(s) <12*n-62-20-15>, in queue <hpcintrogpu>, as user <s182169> in cluster <dcc> at Thu Jan 24 21:43:36 2019
+</zhome/80/a/134683> was used as the home directory.
+</zhome/80/a/134683/Documents/HPC/Week_3/Assignment_3/Matmult> was used as the working directory.
+Started at Thu Jan 24 21:43:36 2019
+Terminated at Thu Jan 24 21:45:10 2019
+Results reported at Thu Jan 24 21:45:10 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -q hpcintrogpu
+#BSUB -o gpu5_4_output.dat
+#BSUB -J gpu5_4
+#BSUB -n 12
+#BSUB -gpu "num=1:mode=exclusive_process:mps=yes" 
+module load cuda/10.0
+numactl --cpunodebind=0
+
+for mat_size in 512 1024 1504 2048 2496 3008 4000 5024 6016 8000 10016
+do
+	./matmult_f.nvcc gpu5 $mat_size $mat_size $mat_size
+done
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   90.18 sec.
+    Max Memory :                                 235 MB
+    Average Memory :                             103.20 MB
+    Total Requested Memory :                     12288.00 MB
+    Delta Memory :                               12053.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                7
+    Run time :                                   110 sec.
+    Turnaround time :                            95 sec.
+
+The output (if any) is above this job summary.
+
