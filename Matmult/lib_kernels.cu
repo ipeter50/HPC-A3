@@ -3,7 +3,7 @@ extern "C"{
 #include <stdio.h>
 #include "lib_kernels.h"
 
-#define STRIDE 16
+#define STRIDE 8
 
 
 
@@ -84,7 +84,7 @@ kernel_gpu3(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 
 
 __global__ void
-kernel_gpu4(double *d_A, double *d_B, double *d_C, int m, int n, int k){
+kernel_gpu4_strided(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 	int i,j;
 	j = 1 * (threadIdx.x + blockIdx.x * blockDim.x);
 	i = 1 * (threadIdx.y + STRIDE * blockIdx.y * blockDim.y);
@@ -103,6 +103,29 @@ kernel_gpu4(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 			d_C[(i+r*blockDim.y)*n + j] = C_reg[r];
 		}
 	}
+}
+
+
+__global__ void
+kernel_gpu4(double *d_A, double *d_B, double *d_C, int m, int n, int k){
+	int i,j;
+	j = 1 * (threadIdx.x + blockIdx.x * blockDim.x);
+	i = STRIDE * (threadIdx.y + blockIdx.y * blockDim.y);
+
+	for(int r=0; r<STRIDE; r++){
+		if(j<n && i<m){
+			double C_reg[STRIDE] = { 0.0 };
+			for(int l = 0; l < k; l++){
+				
+				C_reg[r] += d_A[(i+r)*k+l] * d_B[j+n*l];
+			}
+		
+			d_C[(i+r)*n + j] = C_reg[r];
+		
+		}
+
+	}
+	
 }
 
 
