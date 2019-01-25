@@ -84,7 +84,7 @@ kernel_gpu3(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 
 
 __global__ void
-kernel_gpu4_strided(double *d_A, double *d_B, double *d_C, int m, int n, int k){
+kernel_gpu4(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 	int i,j;
 	j = 1 * (threadIdx.x + blockIdx.x * blockDim.x);
 	i = 1 * (threadIdx.y + STRIDE * blockIdx.y * blockDim.y);
@@ -107,7 +107,7 @@ kernel_gpu4_strided(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 
 
 __global__ void
-kernel_gpu4(double *d_A, double *d_B, double *d_C, int m, int n, int k){
+kernel_gpu4_no_stride(double *d_A, double *d_B, double *d_C, int m, int n, int k){
 	int i,j;
 	j = 1 * (threadIdx.x + blockIdx.x * blockDim.x);
 	i = STRIDE * (threadIdx.y + blockIdx.y * blockDim.y);

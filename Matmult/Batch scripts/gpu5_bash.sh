@@ -1,7 +1,7 @@
 #!/bin/bash
 #BSUB -q hpcintrogpu
-#BSUB -o gpu5_4_output.dat
-#BSUB -J gpu5_4
+#BSUB -o gpu5_8_output.dat
+#BSUB -J gpu5_8
 #BSUB -n 12
 #BSUB -gpu "num=1:mode=exclusive_process:mps=yes" 
 module load cuda/10.0

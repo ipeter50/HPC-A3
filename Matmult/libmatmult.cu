@@ -10,7 +10,7 @@ extern "C"
 
 
 
-#define BLOCK_SIZE 4 //only for GPU5
+#define BLOCK_SIZE 8 //only for GPU5
 
 
 // Matrices are stored in row-major order:
@@ -136,7 +136,7 @@ matmult_gpu3(int m, int n, int k, double *h_A, double *h_B, double *h_C){
 	cudaMemcpy(d_B, h_B, k * n * sizeof(double), cudaMemcpyHostToDevice);
 
 	cudaMalloc((void **)&d_C, m * n * sizeof(double)); 
-	int bs = 32;
+	
 	int dimGridX = (int)ceil(1.0*n/(1*bs));
 	int dimGridY = (int)ceil(1.0*m/(2*bs));
 	
@@ -167,7 +167,7 @@ matmult_gpu4(int m, int n, int k, double *h_A, double *h_B, double *h_C){
 
 	cudaMalloc((void **)&d_C, m * n * sizeof(double)); 
 
-	int blockSize = 16;
+	int blockSize = 32;
 	int elemPerThread = 8;
 	int dimGridX = (int)ceil(1.0*n/blockSize);
 	int dimGridY = (int)ceil(1.0*m/(elemPerThread*blockSize));
